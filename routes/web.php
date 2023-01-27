@@ -20,7 +20,5 @@ Route::post('/', [LoginController::class, 'proses'])->name('proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/home', [HomeController::class, 'index'])->name('admin');
-    Route::get('/{any}', function () {
-        return view('/admin/home');
-    })->where('any', '.*');
+    Route::get('/{any}', [HomeController::class, 'index'])->where('any', '.*');
 });
